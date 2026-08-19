@@ -4385,3 +4385,6 @@ const DATA_CHARACTERS = [
     "magic_alignment": "black"
   }
 ];
+
+// this probably sucks ass
+// this does suck ass but it'll do for now
