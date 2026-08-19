@@ -1,0 +1,680 @@
+/* =====================================================================
+   GARREG MACH LEDGER — style.css
+   =====================================================================
+   All visual styling for the app. Organized top to bottom in roughly
+   the order things appear on the page: colors/fonts, the top header,
+   the sidebar, the character detail page, the class tiles, the
+   skill-reference cards.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   Colors and base page styles
+   --------------------------------------------------------------------- */
+
+:root {
+  --parchment: #F2E9D8;
+  --parchment-deep: #E7DAC0;
+  --ink: #2B2118;
+  --ink-soft: #5B4E3F;
+  --line: #D9C9A8;
+
+  --byleth: #2E6F6E;
+  --church: #6B5B95;
+  --knights: #55524C;
+  --eagles: #7A1F2B;
+  --lions: #1F3A5F;
+  --deer: #A6772C;
+  --wolves: #3D2C4A;
+
+  --strong: #2E7D46;
+  --weak: #A33B3B;
+  --budding: #B5862B;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(107, 91, 149, 0.06), transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(166, 119, 44, 0.07), transparent 45%);
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.02em;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+
+/* ---------------------------------------------------------------------
+   Top header (title, search box)
+   --------------------------------------------------------------------- */
+
+header.top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 28px;
+  background: var(--ink);
+  color: var(--parchment);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+header.top .seal {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #C9A227;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: #C9A227;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+header.top h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--parchment);
+  white-space: nowrap;
+}
+
+header.top .subtitle {
+  font-size: 12px;
+  color: #C9BBA0;
+  margin-top: 1px;
+  letter-spacing: 0.04em;
+}
+
+.search-wrap {
+  margin-left: auto;
+  position: relative;
+  width: 320px;
+  max-width: 40vw;
+}
+
+#search {
+  width: 100%;
+  padding: 9px 14px 9px 34px;
+  border-radius: 20px;
+  border: 1px solid #4A3F32;
+  background: #362C20;
+  color: var(--parchment);
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  outline: none;
+}
+
+#search::placeholder {
+  color: #948569;
+}
+
+#search:focus {
+  border-color: #C9A227;
+}
+
+.search-wrap svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  stroke: #948569;
+}
+
+
+/* ---------------------------------------------------------------------
+   Main tab bar (Characters / Classes / Skill Reference)
+   --------------------------------------------------------------------- */
+
+nav.maintabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 28px;
+  background: #241C14;
+}
+
+nav.maintabs button {
+  background: none;
+  border: none;
+  color: #B7A886;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  padding: 11px 16px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+nav.maintabs button.active {
+  color: #F2E9D8;
+  border-bottom-color: #C9A227;
+}
+
+nav.maintabs button:hover {
+  color: #F2E9D8;
+}
+
+
+/* ---------------------------------------------------------------------
+   Sidebar + character list
+   --------------------------------------------------------------------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: calc(100vh - 96px);
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+aside.sidebar {
+  border-right: 1px solid var(--line);
+  background: var(--parchment-deep);
+  padding: 14px 0 40px;
+  overflow-y: auto;
+}
+
+.house-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+
+.house-tab {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--ink-soft);
+}
+
+.house-tab.active {
+  color: #fff;
+}
+
+.char-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.char-list-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.char-list-item.active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.char-list-item .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.char-list-item .cname {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.char-list-item .chouse {
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  margin-left: auto;
+}
+
+
+/* ---------------------------------------------------------------------
+   Character detail page
+   --------------------------------------------------------------------- */
+
+main.detail {
+  padding: 28px 34px 80px;
+  overflow-x: hidden;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.empty-state h2 {
+  margin-bottom: 6px;
+}
+
+.char-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--line);
+}
+
+.char-header .badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.char-header h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.char-header .meta {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 3px;
+}
+
+section.block {
+  margin-bottom: 26px;
+}
+
+section.block h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+section.block h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+section.block h4 {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 16px 0 8px;
+}
+
+.phase-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.phase-btn {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.phase-btn.active {
+  background: var(--ink);
+  color: var(--parchment);
+  border-color: var(--ink);
+}
+
+.ability-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.ability-card img.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: var(--parchment-deep);
+}
+
+.ability-card .name {
+  font-weight: 600;
+  font-size: 14.5px;
+}
+
+.ability-card .effect {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.recruit-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recruit-box .row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.recruit-box .label {
+  font-weight: 600;
+  min-width: 92px;
+  color: var(--ink-soft);
+}
+
+.prof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.prof-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 12.5px;
+}
+
+.prof-cell img.wicon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.prof-cell .skname {
+  font-weight: 500;
+  flex: 1;
+}
+
+.prof-cell .level {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.prof-cell img.pflag {
+  width: 14px;
+  height: 14px;
+}
+
+
+/* ---------------------------------------------------------------------
+   Skill rows (used by Skills They Can Learn, Authority Abilities,
+   Combat Arts, and the Skill Reference tab)
+   --------------------------------------------------------------------- */
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.skill-row img.icon-sm {
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  background: var(--parchment-deep);
+}
+
+.skill-row .threshold {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--parchment-deep);
+  color: var(--ink-soft);
+  min-width: 30px;
+  text-align: center;
+}
+
+.skill-row .weapon-tag {
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  margin-left: auto;
+}
+
+.skill-row.fallback img.icon-sm {
+  opacity: 0.65;
+}
+
+details.progression-group {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+details.progression-group summary {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+details.progression-group summary::-webkit-details-marker {
+  display: none;
+}
+
+details.progression-group summary img.wicon {
+  width: 18px;
+  height: 18px;
+}
+
+details.progression-group summary .count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+details.progression-group .skill-list {
+  padding: 0 14px 12px;
+}
+
+
+/* ---------------------------------------------------------------------
+   Class tiles (character detail page + standalone Classes tab)
+   --------------------------------------------------------------------- */
+
+.class-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  margin: 18px 0 10px;
+  color: var(--ink);
+}
+
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.class-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.class-card .ctop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.class-card img.cicon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.class-card .cname {
+  font-weight: 700;
+  font-size: 14.5px;
+}
+
+.class-card .cfield {
+  font-size: 12px;
+  margin-top: 4px;
+  line-height: 1.45;
+}
+
+.class-card .cfield b {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.class-card .cfield.mastery {
+  color: var(--budding);
+  font-weight: 600;
+}
+
+.lock-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.lock-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: var(--parchment-deep);
+  color: var(--ink-soft);
+}
+
+
+/* ---------------------------------------------------------------------
+   Skill Reference tab cards
+   --------------------------------------------------------------------- */
+
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 18px;
+}
+
+.ref-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.ref-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.ref-card img.wicon {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ---------------------------------------------------------------------
+   Scrollbar
+   --------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 6px;
+}

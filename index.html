@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garreg Mach Ledger — FE3H Skill Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="seal">Ⅲ</div>
+  <div>
+    <h1>Garreg Mach Ledger</h1>
+    <div class="subtitle">Fire Emblem: Three Houses — Skill &amp; Class Planner</div>
+  </div>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" type="text" placeholder="Search characters…" autocomplete="off">
+  </div>
+</header>
+
+<nav class="maintabs">
+  <button data-tab="characters" class="active">Characters</button>
+  <button data-tab="classes">Classes</button>
+  <button data-tab="reference">Skill Reference</button>
+</nav>
+
+<div id="view-characters" class="layout">
+  <aside class="sidebar">
+    <div class="house-tabs" id="house-tabs"></div>
+    <div id="char-list"></div>
+  </aside>
+  <main class="detail" id="char-detail">
+    <div class="empty-state">
+      <h2>Select a character</h2>
+      <div>Choose someone from the list to see their skills, classes, and growth.</div>
+    </div>
+  </main>
+</div>
+
+<div id="view-classes" class="detail" style="display:none; max-width: 1200px; margin: 0 auto;"></div>
+<div id="view-reference" class="detail" style="display:none; max-width: 1200px; margin: 0 auto;"></div>
+
+<script src="data/characters.js"></script>
+<script src="data/classes.js"></script>
+<script src="data/abilities.js"></script>
+<script src="data/icon-reference.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
